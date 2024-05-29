@@ -71,39 +71,39 @@ public class ShoppingCartController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=update")
-    public String updateCart(@RequestParam("id") int id,
-            @RequestParam("quantity") int quantity,
-            Model model,
-            Principal principal,
-            HttpSession session) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
-        ProductDto productDto = productService.getById(id);
-        String username = principal.getName();
-        ShoppingCart shoppingCart = cartService.updateCart(productDto, quantity, username);
-        model.addAttribute("shoppingCart", shoppingCart);
-        session.setAttribute("totalItems", shoppingCart.getTotalItems());
-        return "redirect:/cart";
+    // @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=update")
+    // public String updateCart(@RequestParam("id") int id,
+    //         @RequestParam("quantity") int quantity,
+    //         Model model,
+    //         Principal principal,
+    //         HttpSession session) {
+    //     if (principal == null) {
+    //         return "redirect:/login";
+    //     }
+    //     ProductDto productDto = productService.getById(id);
+    //     String username = principal.getName();
+    //     ShoppingCart shoppingCart = cartService.updateCart(productDto, quantity, username);
+    //     model.addAttribute("shoppingCart", shoppingCart);
+    //     session.setAttribute("totalItems", shoppingCart.getTotalItems());
+    //     return "redirect:/cart";
 
-    }
+    // }
 
-    @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=delete")
-    public String deleteItem(@RequestParam("id") int id,
-            Model model,
-            Principal principal,
-            HttpSession session) {
-        if (principal == null) {
-            return "redirect:/login";
-        } else {
-            ProductDto productDto = productService.getById(id);
-            String username = principal.getName();
-            ShoppingCart shoppingCart = cartService.removeItemFromCart(productDto, username);
-            model.addAttribute("shoppingCart", shoppingCart);
-            session.setAttribute("totalItems", shoppingCart.getTotalItems());
-            return "redirect:/cart";
-        }
-    }
+    // @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=delete")
+    // public String deleteItem(@RequestParam("id") int id,
+    //         Model model,
+    //         Principal principal,
+    //         HttpSession session) {
+    //     if (principal == null) {
+    //         return "redirect:/login";
+    //     } else {
+    //         ProductDto productDto = productService.getById(id);
+    //         String username = principal.getName();
+    //         ShoppingCart shoppingCart = cartService.removeItemFromCart(productDto, username);
+    //         model.addAttribute("shoppingCart", shoppingCart);
+    //         session.setAttribute("totalItems", shoppingCart.getTotalItems());
+    //         return "redirect:/cart";
+    //     }
+    // }
 
 }

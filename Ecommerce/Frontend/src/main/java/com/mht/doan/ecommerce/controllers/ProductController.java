@@ -47,17 +47,4 @@ public class ProductController {
         return "detail";
     }
 
-    // @GetMapping("/shop-detail")
-    // public String shopDetail(Model model) {
-    // List<CategoryDto> categories = categoryService.getCategoriesAndSize();
-    // model.addAttribute("categories", categories);
-    // List<ProductDto> products = productService.randomProduct();
-    // List<ProductDto> listView = productService.listViewProducts();
-    // model.addAttribute("productViews", listView);
-    // model.addAttribute("title", "Shop Detail");
-    // model.addAttribute("page", "Shop Detail");
-    // model.addAttribute("products", products);
-    // return "shop-detail";
-    // }
-
 }

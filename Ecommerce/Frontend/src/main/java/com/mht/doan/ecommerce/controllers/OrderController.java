@@ -37,29 +37,13 @@ public class OrderController {
             return "redirect:/login";
         } else {
             CustomerDto customer = customerService.getCustomer(principal.getName());
-            // if (customer.getAddress() == null || customer.getCity() == null ||
-            // customer.getPhoneNumber() == null) {
-            // model.addAttribute("information", "You need update your information before
-            // check out");
-            // List<Country> countryList = countryService.findAll();
-            // List<City> cities = cityService.findAll();
-            // model.addAttribute("customer", customer);
-            // model.addAttribute("cities", cities);
-            // model.addAttribute("countries", countryList);
-            // model.addAttribute("title", "Profile");
-            // model.addAttribute("page", "Profile");
-            // return "customer-information";
-            // } else {
             ShoppingCart cart = customerService.findByUsername(principal.getName()).getCart();
             model.addAttribute("customer", customer);
-            model.addAttribute("title", "Check-Out");
-            model.addAttribute("page", "Check-Out");
             model.addAttribute("shoppingCart", cart);
             model.addAttribute("total", Math.ceil(cart.getTotalPrice()));
             model.addAttribute("ship", Math.ceil(cart.getTotalPrice() * 0.1));
             model.addAttribute("grandTotal", Math.ceil(cart.getTotalPrice() * 1.1));
             return "checkout";
-            // }
         }
     }
 
@@ -77,12 +61,12 @@ public class OrderController {
         }
     }
 
-    @RequestMapping(value = "/cancel-order", method = { RequestMethod.PUT, RequestMethod.GET })
-    public String cancelOrder(int id, RedirectAttributes attributes) {
-        orderService.cancelOrder(id);
-        attributes.addFlashAttribute("success", "Cancel order successfully!");
-        return "redirect:/orders";
-    }
+    // @RequestMapping(value = "/cancel-order", method = { RequestMethod.PUT, RequestMethod.GET })
+    // public String cancelOrder(int id, RedirectAttributes attributes) {
+    //     orderService.cancelOrder(id);
+    //     attributes.addFlashAttribute("success", "Cancel order successfully!");
+    //     return "redirect:/orders";
+    // }
 
     @RequestMapping(value = "/add-order", method = { RequestMethod.POST })
     public String createOrder(Principal principal,
@@ -102,7 +86,6 @@ public class OrderController {
             model.addAttribute("page", "Order Detail");
             model.addAttribute("success", "Add order successfully");
             return "redirect:/orders";
-            // return "index";
         }
     }
 
