@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+	<head>
+		<meta charset="utf-8">
+		<title>RegistrationForm_v2 by Colorlib</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+		
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+
+	<body>
+		<div th:if = "${param.error}" class="alert alert-danger text-center">
+			Invalid username or password
+		</div>
+		<div th:if = "${param.logout}" class="alert alert-success text-center">
+			You have been logged out!
+		</div>
+		<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
+			<div class="inner">
+				<form th:action="@{/do-login}" method="post">
+					<h3>Login Form</h3>
+					<div class="form-wrapper">
+						<label for="">Email</label>
+						<input class="form-control" type="text" placeholder="Email" name="username" required>
+					</div>
+					<div class="form-wrapper">
+						<label for="">Password</label>
+						<input class="form-control" type="password" placeholder="Password" name="password">
+					</div>
+					<div class="col-12">
+                        <p class="medium mb-0">Don't have account? <a href="register.html" th:href='register'>Create an account</a></p>
+                      </div>
+					<button type="submit">Login Now</button>
+				</form>
+			</div>
+		</div>
+		
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
