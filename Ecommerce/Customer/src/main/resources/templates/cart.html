@@ -94,9 +94,9 @@
             <i class="fas fa-heart text-primary"></i>
             <span class="badge">0</span>
           </a>
-          <a href="" class="btn border">
+          <a href="cart.html" th:href="@{/cart}" class="btn border">
             <i class="fas fa-shopping-cart text-primary"></i>
-            <span class="badge">0</span>
+            <div class="badge" th:text="${session.totalItems == null ? '0' : session.totalItems}"></div>
           </a>
         </div>
       </div>
@@ -195,7 +195,12 @@
                     <a href="checkout.html" class="dropdown-item">Checkout</a>
                   </div>
                 </div>
-                <a href="order-detail.html" th:href="@{orders}" class="nav-item nav-link">My Order</a>
+                <a
+                  href="order-detail.html"
+                  th:href="@{orders}"
+                  class="nav-item nav-link"
+                  >My Order</a
+                >
               </div>
               <div class="navbar-nav ml-auto py-0">
                 <a href="" class="nav-item nav-link">Login</a>
@@ -251,37 +256,45 @@
                 <td class="align-middle">
                   <p th:text="${cartItem.unitPrice} + 'VND'"></p>
                 </td>
-                <td class="align-middle">
-                  <div
-                    class="input-group quantity mx-auto"
-                    style="width: 100px"
-                  >
-                    <div class="input-group-btn">
-                      <button class="btn btn-sm btn-primary btn-minus">
-                        <i class="fa fa-minus"></i>
-                      </button>
+                <form th:action="@{/update-cart}" method="post">
+                  <input type = "hidden" name = "id" th:value = "${cartItem.product.id}" >
+                  <td class="align-middle">
+                    <div
+                      class="input-group quantity mx-auto"
+                      style="width: 100px"
+                    >
+                      <div class="input-group-btn">
+                        <button class="btn btn-sm btn-primary btn-minus">
+                          <i class="fa fa-minus"></i>
+                        </button>
+                      </div>
+                      <input
+                        th:value="${cartItem.quantity}"
+                        class="form-control form-control-sm bg-secondary text-center"
+                      />
+                      <div class="input-group-btn">
+                        <button class="btn btn-sm btn-primary btn-plus">
+                          <i class="fa fa-plus"></i>
+                        </button>
+                      </div>
                     </div>
-                    <input
-                      th:value="${cartItem.quantity}"
-                      class="form-control form-control-sm bg-secondary text-center"
-                    />
-                    <div class="input-group-btn">
-                      <button class="btn btn-sm btn-primary btn-plus">
-                        <i class="fa fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
-                </td>
-                <td class="align-middle">
-                  <p
-                    th:text="${cartItem.unitPrice * cartItem.quantity} + ' VND'"
-                  ></p>
-                </td>
-                <td class="align-middle">
-                  <button class="btn btn-sm btn-primary">
-                    <i class="fa fa-times"></i>
-                  </button>
-                </td>
+                  </td>
+                  <td class="align-middle">
+                    <p
+                      th:text="${cartItem.unitPrice * cartItem.quantity} + ' VND'"
+                    ></p>
+                  </td>
+                  <td class="align-middle">
+                    <button
+                      type="submit"
+                      name="action"
+                      value="delete"
+                      class="btn btn-sm btn-primary"
+                    >
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </td>
+                </form>
               </tr>
             </tbody>
           </table>
@@ -318,7 +331,11 @@
                 <h5 class="font-weight-bold">Total</h5>
                 <h5 class="font-weight-bold" th:text="${grandTotal}"></h5>
               </div>
-              <a href="checkout.html" th:href="@{/check-out}" class="btn btn-block btn-primary my-3 py-3">
+              <a
+                href="checkout.html"
+                th:href="@{/check-out}"
+                class="btn btn-block btn-primary my-3 py-3"
+              >
                 Proceed To Checkout
               </a>
             </div>

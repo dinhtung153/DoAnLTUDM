@@ -89,21 +89,20 @@ public class ShoppingCartController {
 
     // }
 
-    // @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=delete")
-    // public String deleteItem(@RequestParam("id") int id,
-    //         Model model,
-    //         Principal principal,
-    //         HttpSession session) {
-    //     if (principal == null) {
-    //         return "redirect:/login";
-    //     } else {
-    //         ProductDto productDto = productService.getById(id);
-    //         String username = principal.getName();
-    //         ShoppingCart shoppingCart = cartService.removeItemFromCart(productDto, username);
-    //         model.addAttribute("shoppingCart", shoppingCart);
-    //         session.setAttribute("totalItems", shoppingCart.getTotalItems());
-    //         return "redirect:/cart";
-    //     }
-    // }
-
+    @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=delete")
+    public String deleteItem(@RequestParam("id") int id,
+            Model model,
+            Principal principal,
+            HttpSession session) {
+        if (principal == null) {
+            return "redirect:/login";
+        } else {
+            ProductDto productDto = productService.getById(id);
+            String username = principal.getName();
+            ShoppingCart shoppingCart = cartService.removeItemFromCart(productDto, username);
+            model.addAttribute("shoppingCart", shoppingCart);
+            session.setAttribute("totalItems", shoppingCart.getTotalItems());
+            return "redirect:/cart";
+        }
+    }
 }
