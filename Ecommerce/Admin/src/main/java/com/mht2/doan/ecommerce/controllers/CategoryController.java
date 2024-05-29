@@ -1,7 +1,6 @@
 package com.mht2.doan.ecommerce.controllers;
 
 import com.mht2.doan.ecommerce.dtos.CategoryDto;
-import com.mht2.doan.ecommerce.models.Category;
 import com.mht2.doan.ecommerce.services.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ public class CategoryController {
         List<CategoryDto> categories = categoryService.categories();
         model.addAttribute("categories", categories);
         model.addAttribute("size", categories.size());
-        model.addAttribute("categoryNew", new Category());
         return "categories";
     }
 
@@ -53,7 +51,7 @@ public class CategoryController {
     @GetMapping("/update-category/{id}")
     public String updateCategoryForm(@PathVariable("id") Integer id, Model model) {
         CategoryDto categoryDto = categoryService.getById(id);
-        model.addAttribute("title", "Update Product");
+        model.addAttribute("title", "Update Category");
         model.addAttribute("categoryDto", categoryDto);
         return "update-category";
     }

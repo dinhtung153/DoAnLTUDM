@@ -28,7 +28,6 @@ public class ShoppingCartController {
     private final ProductService productService;
     private final CustomerService customerService;
 
-    @SuppressWarnings("null")
     @GetMapping("/cart")
     public String cart(Model model, Principal principal, HttpSession session) {
         if (principal == null) {
@@ -71,21 +70,23 @@ public class ShoppingCartController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    // @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=update")
+    // @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params =
+    // "action=update")
     // public String updateCart(@RequestParam("id") int id,
-    //         @RequestParam("quantity") int quantity,
-    //         Model model,
-    //         Principal principal,
-    //         HttpSession session) {
-    //     if (principal == null) {
-    //         return "redirect:/login";
-    //     }
-    //     ProductDto productDto = productService.getById(id);
-    //     String username = principal.getName();
-    //     ShoppingCart shoppingCart = cartService.updateCart(productDto, quantity, username);
-    //     model.addAttribute("shoppingCart", shoppingCart);
-    //     session.setAttribute("totalItems", shoppingCart.getTotalItems());
-    //     return "redirect:/cart";
+    // @RequestParam("quantity") int quantity,
+    // Model model,
+    // Principal principal,
+    // HttpSession session) {
+    // if (principal == null) {
+    // return "redirect:/login";
+    // }
+    // ProductDto productDto = productService.getById(id);
+    // String username = principal.getName();
+    // ShoppingCart shoppingCart = cartService.updateCart(productDto, quantity,
+    // username);
+    // model.addAttribute("shoppingCart", shoppingCart);
+    // session.setAttribute("totalItems", shoppingCart.getTotalItems());
+    // return "redirect:/cart";
 
     // }
 
