@@ -38,12 +38,12 @@ public class OrderController {
     public String updateOrderForm(@PathVariable("id") Integer id, Model model) {
         Order order = orderService.findById(id);
         model.addAttribute("title", "Update Order");
-        model.addAttribute("Order", order);
+        model.addAttribute("order", order);
         return "update-order";
     }
 
     @PostMapping("/update-order/{id}")
-    public String updateOrder(@ModelAttribute("Order") Order order,
+    public String updateOrder(@ModelAttribute("order") Order order,
             RedirectAttributes redirectAttributes) {
         try {
             orderService.update(order);
